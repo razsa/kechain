@@ -24,6 +24,8 @@ class Blockchain(object):
             'amount': amount,
         })
 
+        return self.last_block['index'] + 1
+
     @staticmehod
     def hash(block):
         # Hashes a Block
