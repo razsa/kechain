@@ -1,6 +1,7 @@
 import hashlib
 import json
 from time import time
+from uuid import uuid4
 
 
 class Blockchain(object):
@@ -98,6 +99,7 @@ def proof_of_work(self, last_proof):
         guess = f'{last_proof}{proof}'.encode()
         guess_hash = hashlib.sha256(guess).hexdigest()
         return guess_hash[:4] == "0000"
+
     @property
     def last_block(self):
         return self.chain[-1]
