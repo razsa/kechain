@@ -54,7 +54,7 @@ class Blockchain(object):
 
         return self.last_block['index'] + 1
 
-    @staticmehod
+    @staticmethod
     def hash(block):
         """
         Creates a SHA-256 hash of a Block
