@@ -4,19 +4,19 @@ from textwrap import dedent
 from time import time
 from uuid import uuid4
 
-from flask import Flask
+from flask import Flask, jsonify
 
 
-class Blockchain(object):
+class Blockchain:
 
     def __init__(self):
         self.chain = []
         self.current_transactions = []
 
         # Create the genesis block
-        self.new_block(previous_hash=1, proof=100)
+        self.new_block(previous_hash='1', proof=100)
 
-    def new_block(self):
+    def new_block(self, proof, previous_hash):
         """
 
         Create a new Block in the Blockchain
@@ -77,7 +77,7 @@ class Blockchain(object):
         pass
 
 
-def proof_of_work(self, last_proof):
+    def proof_of_work(self, last_proof):
         """
         Simple Proof of Work Algorithm:
          - Find a number p' such that hash(pp') contains leading 4 zeroes, where p is the previous p'
@@ -121,17 +121,18 @@ blockchain = Blockchain()
 def mine():
     return "We'll mine a new Block"
 
-@ap.route('/transactions/new', methods=['POST'])
+@app.route('/transactions/new', methods=['POST'])
 def new_transaction():
     return "We'll add a new transacton"
 
-    @app.route('/chain', methods=['GET'])
-    def full_chain():
-        response = {
-        'chain': blockchain.chain,
-        'length': len(blockchain.chain),
-        }
-        return jsonify(response), 200
+@app.route('/chain', methods=['GET'])
+def full_chain():
+    response = {
+    'chain': blockchain.chain,
+    'length': len(blockchain.chain),
+    }
+    return jsonify(response), 200
 
-    if __name__ == '__main__':
-        app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5001)
+    app.run(debug=True)
